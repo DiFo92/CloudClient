@@ -1,10 +1,10 @@
 
 /*
  * CLOUDCLIENT 0.1
- * Sistema para monitoreo y control de riego automatizado 
+ * Sistema para monitoreo y control de riego automatizado
  * utilizando Raspberry + Arduino
  * Autor: mantgambl
- * Instrucciones: http://medium.com/mantgambl
+ * Instrucciones: http://medium.com/@mantgambl
  * Fecha: 15-01-2015
  */
 
@@ -15,7 +15,7 @@ var app = express();
 var os=require('os');
 var ifaces=os.networkInterfaces();
 var req = require('restler');
-var winston     = require ('winston'); 
+var winston     = require ('winston');
 var path        = require ('path'); //para utilizar rutas
 var fs = require('fs'); //leer desde el filesystem
 
@@ -30,7 +30,7 @@ var fs = require('fs'); //leer desde el filesystem
 // Configuracion de Winston (logging) para crear archivo de log diario
 // ej. log_file.log.2015-13-02
 // uso: logger.info("Registro de log", {extraData: 'texto logueado'});
-var transports  = []; 
+var transports  = [];
 transports.push(new winston.transports.DailyRotateFile({
   name: 'file',
   //datePattern: '.yyyy-MM-ddTHH',
@@ -44,7 +44,7 @@ var _dirname = __dirname;
 
 
 // Modo de inicio de aplicacion:
-// 1.- Configuracion desde config.json. Requiere iniciar server con comando: 
+// 1.- Configuracion desde config.json. Requiere iniciar server con comando:
 //     NODE_ENV=production node app.js
 // 2.- Configuracion como argumentos al iniciar aplicacion
 //     node SwitchControl.js release
@@ -99,12 +99,12 @@ appPort = process.env.PORT || config.app_port;
 console.log("Server Host: " + appHost);
 console.log("Server Port: " + appPort);
 
-logger.info("Server Host: " + appHost);  
+logger.info("Server Host: " + appHost);
 logger.info("Server Port:" + appPort);
 
 
 console.log("Configurando Libreria Auxiliares...");
-logger.info("Fin Configuracion Libreria Auxiliares..."); 
+logger.info("Fin Configuracion Libreria Auxiliares...");
 
 var Auxiliares = require("./lib/util/Auxiliares.js");
 var auxiliares = new Auxiliares();
@@ -142,7 +142,7 @@ app.configure(function() {
   app.set("view options", {layout: false}); // disable layout
   //app.engine('html', require('ejs').renderFile);
    app.set('view engine', 'ejs');
-  
+
   //app.use(express.logger());
   app.use(express.cookieParser());
   app.use(express.bodyParser());
@@ -176,7 +176,7 @@ require('./routes/Monitor.js')(app,moment,dataProvider,logger, graficos);
 
 
 console.log("Fin Configuracion ...");
-logger.info("Fin Configuracion ..."); 
+logger.info("Fin Configuracion ...");
 
 /************************** END CONFIG ********************************/
 
@@ -188,6 +188,6 @@ camara.GetStreamUri(function (data) {
 });
 */
 
-app.listen(appPort); 
+app.listen(appPort);
 console.log('Servidor corriendo en: http://'+IPAddress+':'+appPort+'/');
 logger.info('Servidor corriendo en: http://'+IPAddress+':'+appPort+'/');
